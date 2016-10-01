@@ -1,0 +1,30 @@
+<!-- Location: transaksi/pesan_obat.html -->
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Pesan Obat
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url("gudang_proses/pesan_obat") ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+	          <label>ID Obat</label>
+	          <input type="text" class="form-control" value="<?php echo $pesan->id_obat;?>" disabled/>
+	          <input type="hidden" name="id_obat" value="<?php echo $pesan->id_obat ?>">
+	        </div>
+	        <div class="form-group">
+	          <label>Jumlah</label>
+	          <input type="number" name="eoq" class="form-control" value="<?php echo $eoq ?>"/>
+	          <p class="help-block">Jumlah yang tertera telah sesuai dengan <em>Economic Order Quantity</em>.</p>
+              <p class='help-block'>Namun, anda tetap dapat mengubah jumlah sesuai keinginan.</p>
+	        </div>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Order</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

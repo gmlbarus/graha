@@ -1,0 +1,85 @@
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Daftar
+          <small>Obat</small></h3>
+        <div class="box-tools pull-right">
+          <a href="<?php  echo base_url('gudang/tambah_obat') ?>"  class="btn btn-block btn-default btn-sm" data-toggle="tooltip" title="Tambah">Tambah</a>
+        </div>
+      </div>
+      <div class="box-body">
+        <table id="tabel_obat" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Satuan</th>
+              <th>Stok</th>
+              <th>Harga</th>
+              <th>EOQ
+              <th>ROP
+              <th>Minimum
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+
+              foreach ($obat as $data_obat)
+              {
+                echo "
+                <tr>
+                  <td>{$data_obat->nama}
+                  <td>{$data_obat->satuan}
+                  <td>" . ($data_obat->stok * 1) . "
+                  <td>Rp. {$data_obat->harga}
+                  <td>{$data_obat->eoq}
+                  <td>{$data_obat->rop}
+                  <td>{$data_obat->minimal_stock}
+                  <td><div class='btn-group'>
+                          <a href='".base_url("gudang/view_detail_obat/{$data_obat->id}")."' class='btn btn-primary'>View</a>
+                          <a href='".base_url("gudang/edit_obat/{$data_obat->id}")."' class='btn btn-info'>Edit</a>
+                          <a href='".base_url("gudang_proses/hapus_obat/{$data_obat->id}")."' class='btn btn-danger'>Delete</a>
+                        </div>
+                </tr>";
+              }
+            ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Nama</th>
+              <th>Satuan</th>
+              <th>Stok</th>
+              <th>Harga</th>
+              <th>EOQ
+              <th>ROP
+              <th>Minimum
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div><!-- /.box-body -->
+      
+    </div><!-- /.box -->
+
+  </section><!-- /.content -->
+
+  <!-- DATA TABES SCRIPT -->
+    <script src="<?php echo base_url('view/assets/dist'); ?>/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url('view/assets/dist'); ?>/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function()
+    {
+      $("#tabel_obat").dataTable({
+          "bPaginate": true,
+          "bLengthChange": false,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": false
+        });
+    });
+    </script>

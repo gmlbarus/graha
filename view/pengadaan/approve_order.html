@@ -1,0 +1,43 @@
+<!-- Location: pengadaan/approve_order.html -->
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Approve Order Obat
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url("pengadaan_proses/approve_order") ?>" method="POST">
+    		<!-- text input -->
+            <div class="form-group">
+              <label>ID Order</label>
+              <input type="text" class="form-control" value="<?php echo $approved->id_order ?>" disabled/>
+              <input type="hidden" name="id_order" value="<?php echo $approved->id_order ?>">
+            </div>
+            <div class="form-group">
+              <label>Supplier</label>
+              <select name="id_supplier" class="form-control">
+                  <?php 
+                    foreach ($data_suppliers as $supplier)
+                        echo "<option value='{$supplier->id_supplier}'>{$supplier->nama}</option>";
+                  ?>
+              </select>
+            </div>
+    		<div class="form-group">
+	          <label>ID Obat</label>
+	          <input type="text" class="form-control" value="<?php echo $approved->id_obat;?>" disabled/>
+	          <input type="hidden" name="id_obat" value="<?php echo $approved->id_obat ?>">
+	        </div>
+	        <div class="form-group">
+	          <label>Jumlah</label>
+	          <input type="text" name="nama" class="form-control" value="<?php echo $approved->jumlah ?>" disabled/>
+	          <input type="hidden" name="eoq" value="<?php echo $approved->jumlah_pesan ?>">
+	        </div>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Approve</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

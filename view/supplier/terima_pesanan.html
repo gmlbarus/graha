@@ -1,0 +1,40 @@
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Kirim Obat ke Klinik
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url("supplier_proses/terima_permintaan/{$order->id_order}") ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+	          <label>ID Order</label>
+	          <input type="text" class="form-control" value="<?php echo $order->id_order;?>" disabled/>
+	        </div>
+	        <div class="form-group">
+	          <label>ID Obat</label>
+	          <input type="text" class="form-control" value="<?php echo $order->id_obat ?>" disabled/>
+	          <input type="hidden" name="id_obat" value="<?php echo $order->id_obat ?>">
+	        </div>
+	        <div class="form-group">
+	          <label>Nama Obat</label>
+	          <input type="text" class="form-control" value="<?php echo $order->nama ?>" disabled/>
+	        </div>
+	        <div class="form-group">
+	          <label>Jumlah</label>
+	          <input type="number" name='jumlah_disetujui' class="form-control" value="<?php echo $order->jumlah ?>"/>
+	        </div>
+	        <div class="form-group">
+	          <label>Satuan</label>
+	          <input type="text"class="form-control" value="<?php echo $order->satuan ?>" disabled/>
+	        </div>
+	        
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Setuju</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

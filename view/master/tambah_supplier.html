@@ -1,0 +1,36 @@
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Tambah data Supplier
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url('pengadaan_proses/tambah_supplier') ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+	          <label>ID Supplier</label>
+	          <input type="text" class="form-control" placeholder="ID Supplier Error" value="<?php echo $id_supplier;?>" disabled/>
+	          <input type="hidden" name="id_supplier" value="<?php echo $id_supplier ?>">
+	        </div>
+	        <div class="form-group">
+	          <label>Nama</label>
+	          <input type="text" name="nama" class="form-control" placeholder="Enter Nama Supplier"/>
+	        </div>
+	        <div class="form-group">
+	          <label>Alamat</label>
+	          <textarea name="alamat" class="form-control"></textarea>
+	        </div>
+	        <label>Telepon</label>
+	        <div class="input-group">
+	          <span class="input-group-addon">+62</span>
+	          <input type="text" name="telepon" class="form-control" placeholder="Enter Nomor Telepon Supplier"/>
+	        </div>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

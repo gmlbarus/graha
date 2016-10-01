@@ -1,0 +1,84 @@
+<!-- Location:master/tambah_obat.html -->
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Tambah data Obat
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url('gudang_proses/tambah_obat') ?>" method="POST">
+    		<!-- text input -->
+    		<!-- ID Obat -->
+    		<div class="form-group">
+	          <label>ID Obat</label>
+	          <input type="text" class="form-control" placeholder="ID Obat error" value="<?php echo $id_obat;?>" disabled/>
+	          <input type="hidden" name="id_obat" value="<?php echo $id_obat ?>">
+	        </div>
+	        <!-- Nama Obat -->
+    		<div class="form-group">
+	          <label>Nama Obat</label>
+	          <input type="text" name='nama' class="form-control" placeholder="Enter nama Obat"/>
+	        </div>
+	        <!-- Nama Supplier -->
+	        <div class="form-group">
+	          <label>Nama Supplier</label>
+	          <select name='id_supplier' class="form-control">
+	          	<?php
+	          		foreach ($suppliers as $data_supplier)
+	          			echo "<option value='{$data_supplier->id_supplier}'>{$data_supplier->nama}</option>";	          		
+	          	?>
+	          </select>
+	        </div>
+	        <!-- Satuan Obat -->
+    		<div class="form-group">
+	          <label>Satuan Obat</label>
+	          <select name='satuan' class='form-control'>
+	          	<option value='box'>Box</option>
+	          	<option value='suppos'>Suppos</option>
+	          	<option value='fis'>Fis</option>
+	          </select>
+	        </div>
+	        <!-- Harga -->
+	        <label>Harga</label>
+	        <div class="input-group">
+	          <span class="input-group-addon">Rp.</span>
+	          <input type="number" name="harga" class="form-control" placeholder="Enter Harga Obat"/>
+	        </div>
+	        <!-- Kebutuhan Obat -->
+    		<div class="form-group">
+	          <label>Kebutuhan</label>
+	          <input type="number" name='kebutuhan' class="form-control" placeholder="Enter Kebutuhan Obat"/>
+	          <p class="help-block">Jumlah kebutuhan dalam periode setahun.</em>.</p>
+	        </div>
+	        <!-- Lead Time -->
+	        <label>Lead Time</label>
+	        <div class="input-group">
+	          <input type="number" name="lead_time" class="form-control" placeholder="Enter Lead Time Obat"/>
+	          <span class="input-group-addon">Hari</span>
+	        </div>
+	        <p class="help-block">Lead Time dalam satuan hari</em>.</p>
+	        <!-- Minimal Stok -->
+	        <div class="form-group">
+	          <label>Minimal Stok</label>
+	          <input type="number" name="minimal_stock" class="form-control" placeholder="Enter Stok Minimal Obat"/>
+	        </div>
+	        <!-- Biaya Pesan -->
+	        <label>Biaya Pesan</label>
+	        <div class="input-group">
+	          <span class="input-group-addon">Rp.</span>
+	          <input type="number" name="biaya_pesan" class="form-control" placeholder="Enter Biaya Pesan Obat"/>
+	        </div>
+	        <!-- Stok -->
+	        <div class="form-group">
+	          <label>Stok</label>
+	          <input type="number" name="stok" class="form-control" placeholder="Enter Stok Awal Obat"/>
+	        </div>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

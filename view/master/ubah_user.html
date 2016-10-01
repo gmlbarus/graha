@@ -1,0 +1,52 @@
+<?php 
+function selected_value($value, $level)
+{
+  if ($value == $level)
+    return "value = '{$value}' selected";
+  else
+    return "value='{$value}'";
+}
+
+?>
+<!-- Location:master/ubah_pimpinan -->
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Tambah User
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url('gudang_proses/ubah_user/') ?>" method="POST">
+    		<!-- text input -->
+        <input type='hidden' value='<?php echo $user->id_user ?>' name='id_user'>
+    		<div class="form-group">
+                      <label>Level</label>
+                      <select name='level' class="form-control">
+                      	<option <?php echo selected_value('pimpinan', $user->level) ?> >pimpinan</option>
+                      	<option <?php echo selected_value('supplier', $user->level) ?> >supplier</option>
+                      	<option <?php echo selected_value('penerimaan', $user->level) ?> >staf penerimaan</option>
+                      	<option <?php echo selected_value('pengadaan', $user->level) ?> >admin pengadaan</option>
+                      </select>
+                    </div>
+	        <div class="form-group">
+	          <label>Nama</label>
+	          <input type="text" name="nama" class="form-control" placeholder="Enter Nama User" value="<?php echo $user->nama ?>" />
+	        </div>
+	        <div class="form-group">
+	          <label>username</label>
+	          <input type="text" name="username" class="form-control" placeholder="Enter username" value="<?php echo $user->username ?>"/>
+	        </div>
+	        <div class="form-group">
+	          <label>password</label>
+	          <input type="password" name="password" class="form-control" placeholder="Enter Password"/>
+            <p class="help-block">Kosongkan password jika tidak ingin diubah</p>
+	        </div>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Ubah</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

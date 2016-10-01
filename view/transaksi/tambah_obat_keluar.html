@@ -1,0 +1,35 @@
+<!-- Location: transaksi/tambah_obat_keluar -->
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Tambah Obat Keluar
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url('gudang_proses/tambah_obat_keluar') ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+	          <label>Obat</label>
+	          <select name="id_obat" class="form-control">
+	          	<?php
+	          		foreach ($obat as $data_obat)
+	          			echo "<option value='{$data_obat->id}'>{$data_obat->nama} (stok: " .($data_obat->stok * 1). ")</option>";
+	          		echo "select name=id_obat class = 'form-control'";
+	          	?>
+	          </select>
+	        </div>
+	        <label>Jumlah</label>
+	        <div class="form-group">
+	          <input type="number" name="jumlah" class="form-control" placeholder="Enter jumlah Obat Yang Keluar"/>
+	        </div>
+	        <input type="hidden" name='tanggal' value=<?php echo date('Y-m-d'); ?> />
+	        
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

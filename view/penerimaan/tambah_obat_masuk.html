@@ -1,0 +1,82 @@
+<!-- Location:penerimaan/tambah_obat_masuk.html -->
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Tambah data Obat masuk
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url('penerimaan_proses/tambah_obat_masuk') ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+	          <label>ID Obat Masuk</label>
+	          <input type="text" class="form-control" placeholder="Enter ID Obat" value="<?php echo $id_obat_masuk;?>" disabled/>
+	          <input type="hidden" name="id_obat_masuk" value="<?php echo $id_obat_masuk ?>">
+	        </div>
+	        <div class="form-group">
+                      <label>Supplier</label>
+                      <select name='id_supplier' class="form-control">
+                      	<?php
+                      		foreach ($data_supplier as $supplier)
+                      		{
+                      			echo "
+                      			<option value='{$supplier->id_supplier}'>{$supplier->nama}</option>";	
+                      		}
+                      	?>
+                      </select>
+                    </div>
+	        <div class="form-group">
+	          <label>Nama Obat</label>
+	          <select name='id_obat' class="form-control">
+                      	<?php
+                      		foreach ($data_obat as $obat)
+                      		{
+                      			echo "
+                      			<option value='{$obat->id_obat}'>{$obat->nama}</option>";	
+                      		}
+                      	?>
+                      </select>
+	        </div>
+
+	        <div class="form-group">
+	          <label>Jumlah Masuk</label>
+	          <input type="number" name="jumlah_masuk" class="form-control" placeholder="Enter Jumlah Obat Masuk"/>
+	        </div>
+
+	        <label>Harga</label>
+          <div class="input-group">
+            <span class="input-group-addon">Rp.</span>
+            <input type="number" name="harga" class="form-control" placeholder="Enter Harga Obat"/>
+          </div>
+
+          <label>Tanggal Kadaluarsa</label>
+          <div class="input-group">
+            <input type="text"  id = 'datemask' name='tanggal_kadaluarsa' class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+            <p class="help-block">Format tanggal adalah: 'hari-bulan-tahun'. Dan ditulis dalam format angka. Mis: '31-10-2015'</p>
+          </div>
+
+
+
+	         <input type='hidden' name="tanggal_masuk" value='<?php echo date('Y-m-d'); ?>' />
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+    </div>
+</form>
+    
+</section>
+<script src="<?php echo base_url('view/assets/dist/js') ?>/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="<?php echo base_url('view/assets/dist/js') ?>/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+<script src="<?php echo base_url('view/assets/dist/js') ?>/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+<script type="text/javascript">
+    
+      $(function () {
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd-mm-yyyy", {"placeholder": "dd-mm-yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+      });
+    
+</script>

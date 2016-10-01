@@ -1,0 +1,50 @@
+    <!-- Location:pemimpin/laporan_lainnya -->
+    <!-- Main content -->
+  <section class="content">
+  	<div class="box">
+      <div class="box-body">
+        <form role='form' action='<?php echo base_url('pimpinan_proses/laporan_lainnya') ?>' method='POST'>
+        	<div class='form-group'>
+        		<label>Tipe Laporan:</label>
+        		<select name='tipe_laporan' class='form-control'>
+              <option value='laporan_obat'>Laporan Obat</option>
+              <option value='laporan_supplier'>Laporan Supplier</option>
+        			<option value='laporan_stok'>Laporan Stok Obat</option>
+              <option value='laporan_obat_masuk'>Laporan Obat Masuk</option>
+              <option value='laporan_obat_keluar'>Laporan Obat Keluar</option>
+              <option value='laporan_pemesanan_obat'>Laporan Pemesanan Obat</option>
+              <option value='laporan_pengiriman_obat'>Laporan Pengiriman Obat</option>
+              <option value='laporan_permintaan_obat'>Laporan Permintaan Obat</option>
+        		</select>
+            <p class="help-block">Laporan Obat, Stok Obat, dan Supplier tidak membutuhkan periode. Anda dapat mengabaikan opsi periode di bawah.</em>.</p>
+        	</div>
+          <div class="form-group">
+            <label>Bulan:</label>
+            <select class="form-control" name="bulan">
+              <option value="1">Januari</option>
+              <option value="2">Februari</option>
+              <option value="3">Maret</option>
+              <option value="4">April</option>
+              <option value="5">Mei</option>
+              <option value="6">Juni</option>
+              <option value="7">Juli</option>
+              <option value="8">Agustus</option>
+              <option value="9">September</option>
+              <option value="10">Oktober</option>
+              <option value="11" selected>November</option>
+              <option value="12">Desember</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tahun:</label>
+            <select class="form-control" name="tahun">
+              <option value="2015">2015</option>
+            </select>
+          </div>
+      </div>
+      <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Cetak PDF</button>
+      </div>
+        </form>
+    </div>
+  </section>

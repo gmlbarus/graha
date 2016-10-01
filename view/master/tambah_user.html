@@ -1,0 +1,39 @@
+<!-- Main content -->
+<section class="content">
+	<!-- Default box -->
+    <div class="box">
+    	<div class="box-header with-border">
+    		Tambah User
+    	</div>
+    	<div class="box-body">
+    	<form role='form' action="<?php echo base_url('gudang_proses/tambah_user') ?>" method="POST">
+    		<!-- text input -->
+    		<div class="form-group">
+                      <label>Level</label>
+                      <select name='level' class="form-control">
+                      	<option value='pimpinan'>pimpinan</option>
+                      	<option value="supplier">supplier</option>
+                      	<option value="penerimaan">staf penerimaan</option>
+                      	<option value="pengadaan">admin pengadaan</option>
+                      </select>
+                    </div>
+	        <div class="form-group">
+	          <label>Nama</label>
+	          <input type="text" name="nama" class="form-control" placeholder="Enter Nama User"/>
+	        </div>
+	        <div class="form-group">
+	          <label>username</label>
+	          <input type="text" name="username" class="form-control" placeholder="Enter username"/>
+	        </div>
+	        <div class="form-group">
+	          <label>password</label>
+	          <input type="password" name="password" class="form-control" placeholder="Enter Password"/>
+	        </div>
+    </div>
+    <div class="box-footer">
+	        <button type="submit" class="btn btn-primary">Daftar</button>
+	      </div>
+    </div>
+</form>
+    
+</section>

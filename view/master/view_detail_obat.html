@@ -1,0 +1,71 @@
+<?php
+function convert_tanggal($tanggal)
+{
+  return date("d M Y", strtotime($tanggal));
+}
+?>
+    <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      
+      <div class="box-header with-border">
+        <h3 class="box-title">View
+          <small>Obat</small></h3>
+        
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td><strong>Nama</strong>
+              <td colspan="2"><?php echo $obat->nama; ?>
+            <tr>
+              <td><strong>Satuan</strong>
+              <td colspan="2"><?php echo $obat->satuan; ?>
+            <tr>
+              <td><strong>Harga</strong>
+              <td colspan="2"><?php echo $obat->harga; ?>
+            <tr>
+              <td><strong>Biaya Pesan</strong>
+              <td colspan="2"><?php echo $obat->biaya_pesan; ?>
+            <tr>
+              <td><strong>Kebutuhan</strong>
+              <td colspan="2"><?php echo $obat->kebutuhan; ?>
+            <tr>
+              <td><strong>Lead Time</strong>
+              <td colspan="2"><?php echo $obat->lead_time; ?>
+            <tr>
+              <td><strong>EOQ</strong>
+              <td colspan="2"><?php echo $obat->eoq; ?>
+            <tr>
+              <td><strong>ROP</strong>
+              <td colspan="2"><?php echo $obat->rop; ?>
+            <tr>
+              <td><strong>Safety Stock</strong>
+              <td colspan="2"><?php echo $obat->safety_stock; ?>
+            <tr>
+              <td><strong>ROP + Safety</strong>
+              <td colspan="2"><?php echo $obat->safety_stock + $obat->rop; ?>
+            <tr>  
+                <td><strong>stok</strong>
+                <td><strong>jumlah</strong>
+                <td><STrong>kadaluarsa</STrong>
+            <?php
+              foreach ($stok as $data_stok)
+              {
+                echo "<tr><td><td>{$data_stok->stok}<td>" . convert_tanggal($data_stok->tanggal_kadaluarsa);
+              }
+            ?>
+          </tbody>
+        </table>
+
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+          <a href="<?php echo base_url('gudang/obat') ?>" class="btn btn-info">Kembali</a>
+          </div>
+      </div>
+      
+    </div><!-- /.box -->
+
+  </section><!-- /.content -->
